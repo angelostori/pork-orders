@@ -17,7 +17,7 @@
                     </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <a href="{{ route('clients.index') }}" class="btn btn-dark">Lista clienti</a>
                 </div>
             </div>
         </div>
