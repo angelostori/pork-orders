@@ -3,5 +3,77 @@
 @section('title', 'Modifica un nuovo cliente')
 
 @section('content')
-<h2>modifica</h2>
+<div class="container">
+    <form action="{{ route('clients.update', $client) }}" method="POST">
+        @csrf
+        @method("PUT")
+        <div class="mb-3 row">
+            <label for="name" class="fw-bold col-1 col-form-label">Nome</label>
+            <div class="col-8">
+                <input
+                    class="form-control"
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Nome"
+                    value="{{ $client->name }}">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="surname" class="fw-bold col-1 col-form-label">Cognome</label>
+            <div class="col-8">
+                <input
+                    class="form-control"
+                    type="text"
+                    name="surname"
+                    id="surname"
+                    placeholder="Cognome"
+                    value="{{ $client->surname }}">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="email" class="fw-bold col-1 col-form-label">Email</label>
+            <div class="col-8">
+                <input
+                    class="form-control"
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    value="{{ $client->email }}">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="phone" class="fw-bold col-1 col-form-label">Telefono</label>
+            <div class="col-8">
+                <input
+                    class="form-control"
+                    type="text"
+                    name="phone"
+                    id="phone"
+                    placeholder="Telefono"
+                    value="{{ $client->phone }}">
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="address" class="fw-bold col-1 col-form-label">Indirizzo</label>
+            <div class="col-8">
+                <input
+                    class="form-control"
+                    type="text"
+                    name="address"
+                    id="address"
+                    placeholder="Indirizzo"
+                    value="{{ $client->address }}">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salva</button>
+
+    </form>
+</div>
 @endsection
