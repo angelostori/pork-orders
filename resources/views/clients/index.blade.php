@@ -14,6 +14,7 @@
                 <th>Email</th>
                 <th>Telefono</th>
                 <th>Indirizzo</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -25,6 +26,7 @@
                 <td class="p-3">{{ $client->email }}</td>
                 <td class="p-3">{{ $client->phone }}</td>
                 <td class="p-3">{{ $client->address }}</td>
+                <td><a class="btn btn-outline-warning" href="{{ route('clients.edit', $client) }}">Modifica</a></td>
             </tr>
             @endforeach
         </tbody>

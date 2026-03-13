@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ClientController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,7 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/clients/{client}', [ClientController::class, 'update'])->name('clients.update');
 
     Route::delete('/clients/{client}', [ClientController::class, 'destroy'])->name('clients.destroy');
-
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

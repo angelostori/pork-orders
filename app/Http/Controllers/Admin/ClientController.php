@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('clients.create');
     }
 
     /**
@@ -29,7 +30,15 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client = new Client();
+        $client->name = $request->name;
+        $client->surname = $request->surname;
+        $client->email = $request->email;
+        $client->phone = $request->phone;
+        $client->address = $request->address;
+        $client->save();
+
+        return redirect()->route('clients.index');
     }
 
     /**
@@ -45,7 +54,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view('clients.edit', compact('client'));
     }
 
     /**
@@ -53,7 +62,15 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        $client->name = $request->name;
+        $client->surname = $request->surname;
+        $client->email = $request->email;
+        $client->phone = $request->phone;
+        $client->address = $request->address;
+
+        $client->save();
+
+        return redirect()->route('clients.index');
     }
 
     /**
