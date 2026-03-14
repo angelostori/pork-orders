@@ -19,7 +19,7 @@
             <tr>
                 <td class="p-3">{{ $product->image ?? "-" }}</td>
                 <td class="p-3">{{ $product->name }}</td>
-                <td class="p-3">{{ $product->description }}</td>
+                <td class="p-3">{{Str::limit($product->description, 60)  }}</td>
                 <td class="p-3">{{ $product->price . ' ' . "€\Kg" }}</td>
             </tr>
             @endforeach
