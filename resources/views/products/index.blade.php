@@ -12,7 +12,8 @@
                 <th>Nome</th>
                 <th>Descrizione</th>
                 <th>Prezzo</th>
-                <th></th>
+                <th>Dettaglio</th>
+                <th>Modifica</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,9 @@
                 <td class="p-3">{{Str::limit($product->description, 60)  }}</td>
                 <td class="p-3">{{ $product->price . ' ' . "€\Kg" }}</td>
                 <td><a class="btn btn-outline-primary" href="{{ route('products.show', $product) }}"><i class="bi bi-eye"></i></a></td>
+                @auth
+                <td><a class="btn btn-warning text-light" href="{{ route('products.edit', $product) }}"><i class="bi bi-pencil"></i></a></td>
+                @endauth
             </tr>
             @endforeach
         </tbody>
