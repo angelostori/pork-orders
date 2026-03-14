@@ -18,7 +18,9 @@
                     @endif
 
                     <a href="{{ route('clients.index') }}" class="btn btn-dark">Lista clienti</a>
-                    <a href="{{ route('clients.create') }}" class="btn btn-primary">Aggiungi cliente</a>
+                    <a href="{{ route('clients.create') }}" class="btn btn-dark">Aggiungi cliente</a>
+
+                    <a href="{{ route('products.index') }}" class="btn btn-primary">Lista prodotti</a>
                 </div>
             </div>
         </div>
