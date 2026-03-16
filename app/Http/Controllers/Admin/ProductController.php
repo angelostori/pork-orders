@@ -23,7 +23,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -31,7 +31,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $product = new Product();
+        $product->name = $data['name'];
+        $product->price = $data['price'];
+        $product->description = $data['description'];
+        $product->save();
+
+        return redirect()->route('products.show', $product);
     }
 
     /**
@@ -63,7 +71,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('products.show', $product->id);
+        return redirect()->route('products.show', $product);
     }
 
     /**

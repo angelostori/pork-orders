@@ -13,6 +13,7 @@
                 <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
+
                         {{ session('status') }}
                     </div>
                     @endif
@@ -21,6 +22,7 @@
                     <a href="{{ route('clients.create') }}" class="btn btn-dark">Aggiungi cliente</a>
 
                     <a href="{{ route('products.index') }}" class="btn btn-primary">Lista prodotti</a>
+                    <a href="{{ route('products.create') }}" class="btn btn-primary">Aggiungi prodotto</a>
                 </div>
             </div>
         </div>
