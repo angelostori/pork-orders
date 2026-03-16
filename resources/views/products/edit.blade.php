@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container">
-    <form action="{{ route('products.update', $product) }}" method="POST">
+    <form action="{{ route('products.update', $product) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -22,6 +22,21 @@
                 <input type="text" class="form-control" id="price" name="price" value="{{ $product->price }}">
             </div>
             <label for="price" class="col-form-label fw-bold col-1">€\Kg</label>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="image" class="col-form-label fw-bold col-1">Immagine</label>
+            <div class="col-6">
+                <input type="file" class="form-control" id="image" name="image">
+            </div>
+            @if($product->image)
+            <div class="col-4">
+                <img
+                    src="{{ asset('storage/' . $product->image) }}"
+                    alt="copertina del progetto {{ $product->name }}"
+                    class="img-fluid w-25">
+            </div>
+            @endif
         </div>
 
         <div class="mb-3 row">

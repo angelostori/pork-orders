@@ -78,6 +78,15 @@ class ProductController extends Controller
 
         $product->save();
 
+        if (array_key_exists('image', $data)) {
+            if ($product->image) {
+                Storage::delete($product->image);
+            }
+            $imagePath = Storage::putFile("products", $data['image']);
+            $product->image = $imagePath;
+            $product->save();
+        }
+
         return redirect()->route('products.show', $product);
     }
 
