@@ -13,7 +13,11 @@
         <div class="card-body">
             @if($product->image)
             <div class="card-image">
-                <!-- <img src="{{ asset('storage/' . $product->image) }}" alt="copertina del progetto {{ $product->name }}" class="img-fluid pb-3"> -->
+                <img
+                    src="{{ asset('storage/' . $product->image) }}"
+                    alt="copertina del progetto {{ $product->name }}"
+                    class="img-fluid pb-3"
+                    style="display: block; margin-left: auto; margin-right: auto; max-width: 400px; height: auto;">
             </div>
             @endif
             <h4 class="card-title">Prezzo: {{ $product->price . ' ' . '€\Kg' }}</h4>

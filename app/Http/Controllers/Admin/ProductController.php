@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -38,6 +39,12 @@ class ProductController extends Controller
         $product->price = $data['price'];
         $product->description = $data['description'];
         $product->save();
+
+        if (array_key_exists('image', $data)) {
+            $imagePath = Storage::putFile("products", $data['image']);
+            $product->image = $imagePath;
+            $product->save();
+        }
 
         return redirect()->route('products.show', $product);
     }

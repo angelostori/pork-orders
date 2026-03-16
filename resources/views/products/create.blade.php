@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container">
-    <form action="{{ route('products.store') }}" method="POST">
+    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Nome</label>
@@ -14,6 +14,10 @@
         <div class="mb-3">
             <label for="price" class="form-label">Prezzo</label>
             <input type="number" class="form-control" id="price" name="price" step="0.01" required>
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Immagine</label>
+            <input type="file" class="form-control" id="image" name="image">
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Descrizione</label>
