@@ -86,7 +86,7 @@
         </nav>
 
         <main class="">
-            <div class="container my-3">
+            <div class="container my-5 d-flex justify-content-center">
                 <h1>@yield('title')</h1>
             </div>
             @yield('content')

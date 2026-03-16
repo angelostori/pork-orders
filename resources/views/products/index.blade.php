@@ -4,10 +4,10 @@
 
 @section('content')
 
-<div class="container">
-    <table class="m-auto table table-primary mb-3">
+<div class="container table-responsive">
+    <table class="m-auto table table-primary mb-3 table-striped table-hover text-center">
         <thead>
-            <tr class="table-dark">
+            <tr class="table-dark text-uppercase fw-bold">
                 <th>Immagine</th>
                 <th>Nome</th>
                 <th>Descrizione</th>
@@ -31,13 +31,17 @@
                     <span class="text-muted">-</span>
                     @endif
                 </td>
-                <td class="p-3">{{ $product->name }}</td>
-                <td class="p-3">{{Str::limit($product->description, 60)  }}</td>
-                <td class="p-3">{{ $product->price . ' ' . "€\Kg" }}</td>
-                <td><a class="btn btn-outline-primary" href="{{ route('products.show', $product) }}"><i class="bi bi-eye"></i></a></td>
+                <td class="p-3 align-content-center">{{ $product->name }}</td>
+                <td class="p-3 align-content-center">{{Str::limit($product->description, 60)  }}</td>
+                <td class="p-3 fw-bold align-content-center">{{ $product->price . ' ' . "€\Kg" }}</td>
+                <td class="align-content-center"><a class=" btn btn-outline-primary" href="{{ route('products.show', $product) }}"><i class="bi bi-eye"></i></a></td>
                 @auth
-                <td><a class="btn btn-warning text-light" href="{{ route('products.edit', $product) }}"><i class="bi bi-pencil"></i></a></td>
-                <td>
+                <td class="align-content-center">
+                    <a class="btn btn-warning text-light" href="{{ route('products.edit', $product) }}">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                </td>
+                <td class="align-content-center">
                     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $product->id }}">
                         <i class="bi bi-trash-fill"></i>
                     </button>

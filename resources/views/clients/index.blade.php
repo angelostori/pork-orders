@@ -4,11 +4,11 @@
 
 @section('content')
 
-<div class="container">
+<div class="container table-responsive">
 
-    <table class="m-auto table table-light">
+    <table class="m-auto table table-light table-striped table-hover text-center align-middle mb-3">
         <thead>
-            <tr class="table-dark">
+            <tr class="table-dark text-uppercase fw-bold">
                 <th>Nome</th>
                 <th>Cognome</th>
                 <th>Email</th>
@@ -25,7 +25,7 @@
                 <td class="p-3">{{ $client->name }}</td>
                 <td class="p-3">{{ $client->surname }}</td>
                 <td class="p-3">{{ $client->email }}</td>
-                <td class="p-3">{{ $client->phone }}</td>
+                <td class="p-3 text-start">{{ $client->phone }}</td>
                 <td class="p-3">{{ $client->address }}</td>
                 <td><a class="btn btn-outline-warning" href="{{ route('clients.edit', $client) }}">Modifica</a></td>
                 <td>
