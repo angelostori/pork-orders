@@ -11,20 +11,29 @@
             <div class="mb-3 row align-items-center">
                 <label for="name" class="form-label col-1 fw-bold col-form-label">Nome</label>
                 <div class="col-8">
-                    <input type="text" class="form-control form-control-lg" id="name" name="name" required>
+                    <input type="text" class="form-control form-control-lg @error('name') is-invalid @enderror" id="name" name="name">
+                    @error('name')
+                    <span class="mt-2 text-danger">*Il campo Nome è obbligatorio</span>
+                    @enderror
                 </div>
             </div>
             <div class="mb-3 row align-items-center">
                 <label for="price" class="form-label col-1 fw-bold col-form-label">Prezzo</label>
                 <div class="col-6">
-                    <input type="number" class="form-control form-control-lg" id="price" name="price" step="0.01" required>
+                    <input type="number" class="form-control form-control-lg @error('price') is-invalid @enderror" id="price" name="price" step="0.01">
+                    @error('price')
+                    <span class="mt-2 text-danger">*Il campo Prezzo è obbligatorio</span>
+                    @enderror
                 </div>
                 <label for="price" class="form-label col-1 fw-bold col-form-label">€\Kg</label>
             </div>
             <div class="mb-3 row align-items-center">
-                <label for="image" class="form-label col-1 fw-bold col-form-label">Immagine</label>
+                <label for="image" class="form-label col-1 fw-bold col-form-label ">Immagine</label>
                 <div class="col-8">
-                    <input type="file" class="form-control" id="image" name="image">
+                    <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+                    @error('image')
+                    <span class="mt-2 text-danger">*Il formato dell'immagine non è valido</span>
+                    @enderror
                 </div>
             </div>
             <div class="mb-3 row align-items-center">

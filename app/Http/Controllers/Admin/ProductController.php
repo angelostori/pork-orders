@@ -32,7 +32,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
+        ]);
 
         $product = new Product();
         $product->name = $data['name'];
@@ -70,13 +75,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $data = $request->all();
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
+        ]);
 
         $product->name = $data['name'];
         $product->price = $data['price'];
         $product->description = $data['description'];
-
-        $product->save();
 
         if (array_key_exists('image', $data)) {
             if ($product->image) {
@@ -84,8 +92,9 @@ class ProductController extends Controller
             }
             $imagePath = Storage::putFile("products", $data['image']);
             $product->image = $imagePath;
-            $product->save();
         }
+
+        $product->save();
 
         return redirect()->route('products.show', $product);
     }

@@ -30,12 +30,20 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
+            'email' => 'required|email|unique:clients,email',
+            'phone' => 'required|string|max:20',
+            'address' => 'required|string|max:255',
+        ]);
+
         $client = new Client();
-        $client->name = $request->name;
-        $client->surname = $request->surname;
-        $client->email = $request->email;
-        $client->phone = $request->phone;
-        $client->address = $request->address;
+        $client->name = $data['name'];
+        $client->surname = $data['surname'];
+        $client->email = $data['email'];
+        $client->phone = $data['phone'];
+        $client->address = $data['address'];
         $client->save();
 
         return redirect()->route('clients.index');
@@ -62,11 +70,19 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        $client->name = $request->name;
-        $client->surname = $request->surname;
-        $client->email = $request->email;
-        $client->phone = $request->phone;
-        $client->address = $request->address;
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
+            'email' => 'required|email|unique:clients,email,' . $client->id,
+            'phone' => 'required|string|max:20',
+            'address' => 'required|string|max:255',
+        ]);
+
+        $client->name = $data['name'];
+        $client->surname = $data['surname'];
+        $client->email = $data['email'];
+        $client->phone = $data['phone'];
+        $client->address = $data['address'];
 
         $client->save();
 
