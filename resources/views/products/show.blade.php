@@ -5,25 +5,26 @@
 @section('content')
 
 <div class="container my-5">
-    <div class="card">
-        <div class="card-header">
+    <div class="card shadow-sm">
+        <div class="card-header bg-light py-3">
             <h3>{{ $product->name }}</h3>
-
         </div>
-        <div class="card-body">
+        <div class="card-body p-4">
             @if($product->image)
-            <div class="card-image">
+            <div class="card-image text-center">
                 <img
                     src="{{ asset('storage/' . $product->image) }}"
                     alt="copertina del progetto {{ $product->name }}"
-                    class="img-fluid pb-3"
-                    style="display: block; margin-left: auto; margin-right: auto; max-width: 400px; height: auto;">
+                    class="img-fluid rounded mb-3"
+                    style="max-height: 400px; object-fit: cover; width: 90%;">
             </div>
             @endif
             <h4 class="card-title">Prezzo: {{ $product->price . ' ' . '€\Kg' }}</h4>
             <p class="card-text">{{ $product->description }}</p>
         </div>
-        <a class="btn btn-primary" href="{{ route('products.index') }}">Torna alla lista dei prodotti</a>
+        <div class="card-footer py-3 d-flex justify-content-end">
+            <a class="btn btn-primary" href="{{ route('products.index') }}">Torna alla lista dei prodotti</a>
+        </div>
     </div>
 </div>
 
