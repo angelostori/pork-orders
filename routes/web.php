@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 
 Route::middleware('auth')->group(function () {
 
@@ -40,6 +43,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
 
+
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
@@ -54,5 +59,24 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+
+
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+
+    Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
+
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+
+    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+
+    Route::get('/orders/{order}/edit', [OrderController::class, 'edit'])->name('orders.edit');
+
+    Route::put('/orders/{order}', [OrderController::class, 'update'])->name('orders.update');
+
+    Route::delete('/orders/{order}', [OrderController::class, 'destroy'])->name('orders.destroy');
+});
 
 require __DIR__ . '/auth.php';
