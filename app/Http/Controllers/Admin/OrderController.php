@@ -80,7 +80,10 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $clients = Client::all();
+        $products = Product::all();
+
+        return view('orders.edit', compact('order', 'clients', 'products'));
     }
 
     /**
@@ -88,7 +91,32 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $order->client_id = $request->client_id;
+        $order->save();
+
+        $total = 0;
+
+        foreach ($request->products as $productId => $quantity) {
+
+            if ($quantity > 0) {
+
+                $product = Product::find($productId);
+
+                $order->products()->syncWithoutDetaching([$productId => [
+                    'quantity' => $quantity,
+                    'price' => $product->price
+                ]]);
+
+                $total += $product->price * $quantity;
+            } else {
+                $order->products()->detach($productId);
+            }
+        }
+
+        $order->total = $total;
+        $order->save();
+
+        return redirect()->route('orders.index');
     }
 
     /**

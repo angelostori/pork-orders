@@ -30,6 +30,7 @@
             <td>{{ $order->order_date }}</td>
             <td>{{ $order->total }}</td>
             <td>
+                <a href="{{ route('orders.edit', $order) }}" class="btn btn-sm btn-primary">Modifica</a>
                 <form action="{{ route('orders.destroy', $order) }}" method="POST">
                     @csrf
                     @method('DELETE')
