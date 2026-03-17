@@ -13,6 +13,7 @@
             <th>Prodotti</th>
             <th>Data Ordine</th>
             <th>Totale</th>
+            <th>Azioni</th>
         </tr>
     </thead>
     <tbody>
@@ -28,6 +29,13 @@
             </td>
             <td>{{ $order->order_date }}</td>
             <td>{{ $order->total }}</td>
+            <td>
+                <form action="{{ route('orders.destroy', $order) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-sm btn-danger">Elimina</button>
+                </form>
+            </td>
         </tr>
         @endforeach
     </tbody>

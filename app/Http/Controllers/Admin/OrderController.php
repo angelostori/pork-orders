@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -23,7 +25,10 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $clients = Client::all();
+        $products = Product::all();
+
+        return view('orders.create', compact('clients', 'products'));
     }
 
     /**
@@ -31,7 +36,35 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $order = new Order();
+
+        $order->client_id = $request->client_id;
+        $order->order_date = now();
+        $order->total = 0;
+
+        $order->save();
+
+        $total = 0;
+
+        foreach ($request->products as $productId => $quantity) {
+
+            if ($quantity > 0) {
+
+                $product = Product::find($productId);
+
+                $order->products()->attach($productId, [
+                    'quantity' => $quantity,
+                    'price' => $product->price
+                ]);
+
+                $total += $product->price * $quantity;
+            }
+        }
+
+        $order->total = $total;
+        $order->save();
+
+        return redirect()->route('orders.index');
     }
 
     /**
@@ -63,6 +96,8 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+
+        return redirect()->route('orders.index');
     }
 }

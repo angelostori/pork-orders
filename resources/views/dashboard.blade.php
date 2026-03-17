@@ -23,6 +23,9 @@
 
                     <a href="{{ route('products.index') }}" class="btn btn-primary">Lista prodotti</a>
                     <a href="{{ route('products.create') }}" class="btn btn-primary">Aggiungi prodotto</a>
+
+                    <a href="{{ route('orders.index') }}" class="btn btn-success">Lista ordini</a>
+                    <a href="{{ route('orders.create') }}" class="btn btn-success">Crea ordine</a>
                 </div>
             </div>
         </div>
