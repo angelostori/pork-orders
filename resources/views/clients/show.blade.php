@@ -35,7 +35,9 @@
             </ul>
             @endif
         </div>
+    </div>
 
+    <div class="d-flex justify-content-end align-items-center">
         <a href="{{ route('clients.index') }}" class="btn btn-secondary">
             <i class="bi bi-arrow-left me-1"></i>Torna alla lista clienti
         </a>
