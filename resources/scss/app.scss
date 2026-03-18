@@ -1,1 +1,61 @@
 @import '~bootstrap/scss/bootstrap';
+
+:root {
+    --color-primary: #008c8c;
+    --color-secondary: #e8809a;
+    --color-secondary-dark: #c0506a;
+}
+
+nav {
+    background-color: var(--color-primary);
+}
+
+nav img {
+    height: 60px;
+}
+
+nav i {
+    color: var(--color-secondary);
+}
+
+.jumbotron svg>line {
+    stroke: var(--color-primary);
+}
+
+#table-product {
+    --bs-table-striped-bg: #fce4ec;
+    --bs-table-bg: #ffffff;
+    --bs-table-hover-bg: #f8bbd0;
+    --bs-table-color: #1a1a1a;
+}
+
+#table-orders {
+    --bs-table-striped-bg: #e0f4f4;
+    --bs-table-bg: #ffffff;
+    --bs-table-hover-bg: #008c8c;
+    --bs-table-color: #1a1a1a;
+    --bs-table-hover-color: #ffffff;
+}
+
+.create-form-img {
+    height: 335px;
+    position: relative;
+    right: 455px;
+    top: -35px;
+}
+
+#welcome-img {
+    .lt {
+        font-family: system-ui, sans-serif;
+        font-weight: 700;
+        font-size: 52px;
+        fill: #008c8c;
+    }
+
+    .ls {
+        font-family: system-ui, sans-serif;
+        font-weight: 300;
+        font-size: 52px;
+        fill: #e8809a;
+    }
+}

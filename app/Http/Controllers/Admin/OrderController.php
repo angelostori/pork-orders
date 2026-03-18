@@ -36,6 +36,14 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'client_id' => 'required|exists:clients,id',
+            'products' => 'required|array',
+        ]);
+
+        $clients = Client::all();
+        $products = Product::all();
+
         $order = new Order();
 
         $order->client_id = $request->client_id;
@@ -64,7 +72,7 @@ class OrderController extends Controller
         $order->total = $total;
         $order->save();
 
-        return redirect()->route('orders.index');
+        return redirect()->route('orders.index', compact('clients', 'products'));
     }
 
     /**

@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header">{{ __('User Dashboard') }}</div>
 
-                <div class="card-body">
+                <div class="card-body d-flex justify-content-around">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
 
@@ -18,14 +18,20 @@
                     </div>
                     @endif
 
-                    <a href="{{ route('clients.index') }}" class="btn btn-dark">Lista clienti</a>
-                    <a href="{{ route('clients.create') }}" class="btn btn-dark">Aggiungi cliente</a>
+                    <div>
+                        <a href="{{ route('clients.index') }}" class="btn btn-dark">Lista clienti</a>
+                        <a href="{{ route('clients.create') }}" class="btn btn-dark">Crea cliente</a>
+                    </div>
 
-                    <a href="{{ route('products.index') }}" class="btn btn-primary">Lista prodotti</a>
-                    <a href="{{ route('products.create') }}" class="btn btn-primary">Aggiungi prodotto</a>
+                    <div>
+                        <a href="{{ route('products.index') }}" class="btn btn-primary">Lista prodotti</a>
+                        <a href="{{ route('products.create') }}" class="btn btn-primary">Crea prodotto</a>
+                    </div>
 
-                    <a href="{{ route('orders.index') }}" class="btn btn-success">Lista ordini</a>
-                    <a href="{{ route('orders.create') }}" class="btn btn-success">Crea ordine</a>
+                    <div>
+                        <a href="{{ route('orders.index') }}" class="btn btn-success">Lista ordini</a>
+                        <a href="{{ route('orders.create') }}" class="btn btn-success">Crea ordine</a>
+                    </div>
                 </div>
             </div>
         </div>

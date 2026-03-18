@@ -1,0 +1,25 @@
+<svg width="100%" viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg">
+  
+
+  <!-- Testa maiale minimal -->
+  <circle cx="72" cy="80" r="44" fill="none" stroke="#e8809a" stroke-width="3" style="fill:none;stroke:rgb(232, 128, 154);color:rgb(255, 255, 255);stroke-width:3px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Orecchie -->
+  <ellipse cx="52" cy="44" rx="10" ry="13" fill="none" stroke="#e8809a" stroke-width="3" transform="rotate(-15 52 44)" style="fill:none;stroke:rgb(232, 128, 154);color:rgb(255, 255, 255);stroke-width:3px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <ellipse cx="92" cy="44" rx="10" ry="13" fill="none" stroke="#e8809a" stroke-width="3" transform="rotate(15 92 44)" style="fill:none;stroke:rgb(232, 128, 154);color:rgb(255, 255, 255);stroke-width:3px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Occhi -->
+  <circle cx="60" cy="70" r="3.5" fill="#e8809a" style="fill:rgb(232, 128, 154);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="84" cy="70" r="3.5" fill="#e8809a" style="fill:rgb(232, 128, 154);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Naso -->
+  <ellipse cx="72" cy="92" rx="14" ry="10" fill="none" stroke="#e8809a" stroke-width="2.5" style="fill:none;stroke:rgb(232, 128, 154);color:rgb(255, 255, 255);stroke-width:2.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="67" cy="92" r="3" fill="#e8809a" style="fill:rgb(232, 128, 154);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="77" cy="92" r="3" fill="#e8809a" style="fill:rgb(232, 128, 154);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Separatore verticale -->
+  <line x1="148" y1="28" x2="148" y2="132" stroke="#e0e0e0" stroke-width="1.5" style="fill:rgb(0, 0, 0);stroke:rgb(224, 224, 224);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Testo centrato verticalmente (dominant-baseline="middle" a y=80) -->
+  <text x="172" y="80" dominant-baseline="middle" style="fill:rgb(240, 240, 240);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:system-ui, sans-serif;font-size:52px;font-weight:700;text-anchor:start;dominant-baseline:middle">pork<tspan style="fill:rgb(232, 128, 154);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:system-ui, sans-serif;font-size:52px;font-weight:300;text-anchor:start;dominant-baseline:middle">orders</tspan></text>
+</svg>

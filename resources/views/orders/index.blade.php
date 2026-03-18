@@ -6,7 +6,7 @@
 
 <div class="container table-responsive">
 
-    <table class="table table-success m-auto table-striped table-hover align-middle mb-3">
+    <table id="table-orders" class="table m-auto table-striped table-hover align-middle mb-3">
         <thead>
             <tr class="table-dark text-uppercase fw-bold">
                 <th>ID</th>

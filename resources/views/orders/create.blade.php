@@ -13,7 +13,7 @@
                 <h5 class="fw-semibold mb-3">
                     <i class="bi bi-person me-2 text-primary"></i>Cliente
                 </h5>
-                <select class="form-select form-select-lg">
+                <select name="client_id" class="form-select form-select-lg">
                     <option value="" disabled selected>Seleziona un cliente...</option>
                     @foreach($clients as $client)
                     <option value="{{ $client->id }}">

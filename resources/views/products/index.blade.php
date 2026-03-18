@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container table-responsive">
-    <table class="m-auto table table-primary mb-3 table-striped table-hover text-center">
+    <table id="table-product" class="m-auto table mb-3 table-striped table-hover text-center">
         <thead>
             <tr class="table-dark text-uppercase fw-bold">
                 <th>Immagine</th>
