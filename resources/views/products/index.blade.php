@@ -12,9 +12,7 @@
                 <th>Nome</th>
                 <th>Descrizione</th>
                 <th>Prezzo</th>
-                <th>Dettaglio</th>
-                <th>Modifica</th>
-                <th>Elimina</th>
+                <th>Azioni</th>
             </tr>
         </thead>
         <tbody>
@@ -34,14 +32,13 @@
                 <td class="p-3 align-content-center">{{ $product->name }}</td>
                 <td class="p-3 align-content-center">{{Str::limit($product->description, 60)  }}</td>
                 <td class="p-3 fw-bold align-content-center">{{ $product->price . ' ' . "€\Kg" }}</td>
-                <td class="align-content-center"><a class=" btn btn-outline-primary" href="{{ route('products.show', $product) }}"><i class="bi bi-eye"></i></a></td>
-                @auth
-                <td class="align-content-center">
+                <td class="p-3 align-content-center">
+                    <a class=" btn btn-outline-primary" href="{{ route('products.show', $product) }}"><i class="bi bi-eye"></i></a>
+                    @auth
                     <a class="btn btn-warning text-light" href="{{ route('products.edit', $product) }}">
                         <i class="bi bi-pencil"></i>
                     </a>
-                </td>
-                <td class="align-content-center">
+
                     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $product->id }}">
                         <i class="bi bi-trash-fill"></i>
                     </button>
@@ -67,8 +64,10 @@
                             </div>
                         </div>
                     </div>
+
+                    @endauth
                 </td>
-                @endauth
+
             </tr>
             @endforeach
         </tbody>

@@ -14,8 +14,7 @@
                 <th>Email</th>
                 <th>Telefono</th>
                 <th>Indirizzo</th>
-                <th></th>
-                <th></th>
+                <th>Azioni</th>
             </tr>
         </thead>
 
@@ -27,11 +26,16 @@
                 <td class="p-3">{{ $client->email }}</td>
                 <td class="p-3 text-start">{{ $client->phone }}</td>
                 <td class="p-3">{{ $client->address }}</td>
-                <td><a class="btn btn-outline-warning" href="{{ route('clients.edit', $client) }}">Modifica</a></td>
-                <td>
-                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $client->id }}">
-                        <i class="bi bi-trash-fill"></i>
-                    </button>
+                <td class="p-3">
+                    <div class="d-flex justify-content-center gap-2">
+                        <a class="btn btn-outline-warning" href="{{ route('clients.edit', $client) }}">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $client->id }}">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                    </div>
 
                     <div class="modal fade" id="deleteModal-{{ $client->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
