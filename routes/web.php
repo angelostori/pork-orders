@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Api\OrderController as ApiOrderController;
+use App\Http\Controllers\Api\ProductController as ApiProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -79,5 +81,15 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/orders/{order}', [OrderController::class, 'destroy'])->name('orders.destroy');
 });
+
+
+
+Route::get('/products', [ApiProductController::class, 'index']);
+Route::get('/products/{product}', [ApiProductController::class, 'show']);
+
+Route::get('/orders', [ApiOrderController::class, 'index']);
+Route::get('/orders/{order}', [ApiOrderController::class, 'show']);
+
+Route::post('/orders', [ApiOrderController::class, 'store']);
 
 require __DIR__ . '/auth.php';
