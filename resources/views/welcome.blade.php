@@ -25,8 +25,9 @@
 </div>
 
 <div class="content">
-    <div class="container">
-        <p>Accedi alla tua dashboard per iniziare a gestire il flusso di lavoro quotidiano.</p>
+    <div class="container d-flex">
+        <p class="mt-1 me-3">Accedi alla tua <a class="" href="/dashboard">Dashboard</a> per iniziare a gestire il flusso di lavoro quotidiano.</p>
+
     </div>
 </div>
 @endsection

@@ -40,12 +40,12 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-
 
 
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 
@@ -56,9 +56,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
 
     Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 });
 
-Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
 
 
