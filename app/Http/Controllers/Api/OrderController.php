@@ -3,9 +3,63 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    //
+    public function index()
+    {
+        $orders = Order::with(['client', 'products'])->get();
+
+        return response()->json($orders);
+    }
+
+    public function show(Order $order)
+    {
+        $order->load(['client', 'products']);
+
+        return response()->json($order);
+    }
+
+    public function store(Request $request)
+    {
+        $order = new Order();
+
+        $order->client_id = $request->client_id;
+        $order->order_date = now();
+        $order->total = 0;
+
+        $order->save();
+
+        $total = 0;
+
+        foreach ($request->products as $productId => $quantity) {
+
+            if ($quantity > 0) {
+
+                $product = Product::find($productId);
+
+                if (!$product) {
+                    continue;
+                }
+
+                $order->products()->attach($productId, [
+                    'quantity' => $quantity,
+                    'price' => $product->price
+                ]);
+
+                $total += $product->price * $quantity;
+            }
+        }
+
+        $order->total = $total;
+        $order->save();
+
+        return response()->json([
+            'message' => 'Ordine creato',
+            'order' => $order
+        ]);
+    }
 }
