@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -25,12 +26,24 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        $order = new Order();
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'products' => 'required|array',
+        ]);
 
-        $order->client_id = $request->client_id;
+        $client = new Client();
+        $client->name = $request->name;
+        $client->surname = $request->surname;
+        $client->email = $request->email;
+        $client->phone = $request->phone;
+        $client->address = $request->address;
+        $client->save();
+
+        $order = new Order();
+        $order->client_id = $client->id;
         $order->order_date = now();
         $order->total = 0;
-
         $order->save();
 
         $total = 0;
