@@ -13,6 +13,7 @@
                 <th>Data Ordine</th>
                 <th>Cliente</th>
                 <th>Prodotti</th>
+                <th>Note</th>
                 <th>Totale</th>
                 <th>Azioni</th>
             </tr>
@@ -30,6 +31,9 @@
                         <li>{{ $product->name }} ({{ $product->pivot->quantity }} x {{ $product->pivot->price . ' €'}})</li>
                         @endforeach
                     </ul>
+                </td>
+                <td class="p-3">
+                    <p>{{ $order->note ?? 'Nessuna nota' }}</p>
                 </td>
                 <td class="p-3">{{ $order->total . ' €' }}</td>
                 <td class="p-3">

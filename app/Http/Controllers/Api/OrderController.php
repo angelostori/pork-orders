@@ -30,6 +30,7 @@ class OrderController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'products' => 'required|array',
+            'note ' => ' nullable | string ',
         ]);
 
         $client = new Client();
@@ -44,6 +45,7 @@ class OrderController extends Controller
         $order->client_id = $client->id;
         $order->order_date = now();
         $order->total = 0;
+        $order->note = $request->note;
         $order->save();
 
         $total = 0;

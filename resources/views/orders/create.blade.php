@@ -56,6 +56,16 @@
             </div>
         </div>
 
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body p-4">
+                <h5 class="fw-semibold mb-3">
+                    <i class="bi bi-journal-text me-2 text-primary"></i>Note
+                </h5>
+                <textarea name="note" class="form-select form-select-lg" placeholder="Note (facoltativo)">
+                </textarea>
+            </div>
+        </div>
+
         <div class="d-flex justify-content-end align-items-center">
             <button type="submit" class="btn btn-primary px-4">
                 <i class="bi bi-check-lg me-1"></i>Crea ordine

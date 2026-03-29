@@ -50,6 +50,7 @@ class OrderController extends Controller
 
         $order->client_id = $request->client_id;
         $order->order_date = now();
+        $order->note = $request->note;
         $order->total = 0;
 
         $order->save();
