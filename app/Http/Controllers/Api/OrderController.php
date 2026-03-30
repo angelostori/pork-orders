@@ -28,7 +28,8 @@ class OrderController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
+            'surname' => 'required',
+            'email' => 'nullable|email',
             'products' => 'required|array',
             'note ' => ' nullable | string ',
         ]);
