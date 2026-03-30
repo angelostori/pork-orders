@@ -5,6 +5,12 @@
 @section('content')
 <div class="container mb-5">
 
+    @error('products')
+    <div class="alert alert-danger">
+        {{ $message }}
+    </div>
+    @enderror
+
     <form action="{{ route('orders.update', $order) }}" method="POST">
         @csrf
         @method('PUT')

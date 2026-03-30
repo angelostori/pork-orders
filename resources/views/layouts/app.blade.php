@@ -39,7 +39,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link fw-bold text-light" href="{{url('/') }}"><i class="bi bi-house-fill"></i> | {{ __('Home') }}</a>
+                        <a class="nav-link fw-bold text-light" href="{{ route('dashboard') }}"><i class="bi bi-clipboard-data-fill"></i> | {{ __('Dashboard') }}</a>
                     </li>
                 </ul>
 

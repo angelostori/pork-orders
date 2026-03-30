@@ -52,7 +52,7 @@
                             placeholder="Email"
                             value="{{ $client->email }}">
                         @error('email')
-                        <span class="mt-2 text-danger">*Il campo Email è obbligatorio</span>
+                        <span class="mt-2 text-danger">*Email già presente</span>
                         @enderror
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                             placeholder="Telefono"
                             value="{{ $client->phone }}">
                         @error('phone')
-                        <span class="mt-2 text-danger">*Il campo Telefono è obbligatorio</span>
+                        <span class="mt-2 text-danger">*Numero massimo di caratteri superato (20)</span>
                         @enderror
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                             placeholder="Indirizzo"
                             value="{{ $client->address }}">
                         @error('address')
-                        <span class="mt-2 text-danger">*Il campo Indirizzo è obbligatorio</span>
+                        <span class="mt-2 text-danger">*Numero massimo di caratteri superato</span>
                         @enderror
                     </div>
                 </div>

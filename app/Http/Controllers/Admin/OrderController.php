@@ -41,7 +41,23 @@ class OrderController extends Controller
         $request->validate([
             'client_id' => 'required|exists:clients,id',
             'products' => 'required|array',
+            'products.*' => 'nullable|integer|min:0',
         ]);
+
+        $hasProducts = false;
+
+        foreach ($request->products as $quantity) {
+            if ($quantity > 0) {
+                $hasProducts = true;
+                break;
+            }
+        }
+
+        if (!$hasProducts) {
+            return back()
+                ->withErrors(['products' => 'Devi inserire almeno un prodotto'])
+                ->withInput();
+        }
 
         $clients = Client::all();
         $products = Product::all();
@@ -102,27 +118,56 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        $order->client_id = $request->client_id;
-        $order->save();
+        $request->validate([
+            'client_id' => 'required|exists:clients,id',
+            'products' => 'required|array',
+            'products.*' => 'nullable|integer|min:0',
+        ]);
 
+        // controllo almeno un prodotto
+        $hasProducts = false;
+
+        foreach ($request->products as $quantity) {
+            if ($quantity > 0) {
+                $hasProducts = true;
+                break;
+            }
+        }
+
+        if (!$hasProducts) {
+            return back()
+                ->withErrors(['products' => 'Devi inserire almeno un prodotto'])
+                ->withInput();
+        }
+
+        // aggiorna cliente
+        $order->client_id = $request->client_id;
+
+        // carica tutti i prodotti in una query
+        $products = Product::whereIn('id', array_keys($request->products))
+            ->get()
+            ->keyBy('id');
+
+        $attachData = [];
         $total = 0;
 
         foreach ($request->products as $productId => $quantity) {
 
             if ($quantity > 0) {
 
-                $product = Product::find($productId);
+                $product = $products[$productId];
 
-                $order->products()->syncWithoutDetaching([$productId => [
+                $attachData[$productId] = [
                     'quantity' => $quantity,
                     'price' => $product->price
-                ]]);
+                ];
 
                 $total += $product->price * $quantity;
-            } else {
-                $order->products()->detach($productId);
             }
         }
+
+        // sincronizza tutto
+        $order->products()->sync($attachData);
 
         $order->total = $total;
         $order->save();

@@ -5,6 +5,18 @@
 @section('content')
 <div class="container mb-5">
 
+    @error('products')
+    <div class="alert alert-danger">
+        {{ $message }}
+    </div>
+    @enderror
+
+    @error('client_id')
+    <div class="alert alert-danger">
+        <span>Il campo Cliente è obbligatorio</span>
+    </div>
+    @enderror
+
     <form action="{{ route('orders.store') }}" method="POST">
         @csrf
 
