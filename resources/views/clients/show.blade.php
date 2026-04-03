@@ -29,7 +29,7 @@
             <ul>
                 @foreach($client->orders as $order)
                 <li>
-                    <span>Ordine #{{ $order->id }} - {{ $order->order_date }} - Totale: {{ $order->total }} €</span>
+                    <span>Ordine <a href="{{ route('orders.show', $order->id) }}">#{{ $order->id }}</a> - {{ $order->order_date }} - Totale: {{ $order->total }} €</span>
                 </li>
                 @endforeach
             </ul>
