@@ -20,8 +20,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-
 Route::middleware('auth')->group(function () {
 
     Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
@@ -29,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
 
     Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
+
+    Route::get('/clients/search', [ClientController::class, 'search'])->name('clients.search');
 
     Route::get('/clients/{client}', [ClientController::class, 'show'])->name('clients.show');
 
@@ -79,5 +79,6 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/orders/{order}', [OrderController::class, 'destroy'])->name('orders.destroy');
 });
+
 
 require __DIR__ . '/auth.php';

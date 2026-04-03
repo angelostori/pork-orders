@@ -6,6 +6,13 @@
 
 <div class="container table-responsive">
 
+    <form action="{{ route('clients.search') }}" method="GET">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Cerca clienti..." name="search">
+            <button class="btn btn-outline-primary" type="submit">Cerca</button>
+        </div>
+    </form>
+
     <table class="m-auto table table-light table-striped table-hover text-center align-middle mb-3">
         <thead>
             <tr class="table-dark text-uppercase fw-bold">
@@ -19,7 +26,7 @@
         </thead>
 
         <tbody>
-            @foreach($clients as $client)
+            @forelse($results ?? $clients as $client)
             <tr>
                 <td class="p-3">{{ $client->name }}</td>
                 <td class="p-3">{{ $client->surname }}</td>
@@ -64,7 +71,11 @@
                     </div>
                 </td>
             </tr>
-            @endforeach
+            @empty
+            <tr>
+                <td colspan="6" class="p-3">Nessun cliente trovato.</td>
+            </tr>
+            @endforelse
         </tbody>
 
     </table>

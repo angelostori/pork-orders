@@ -98,4 +98,15 @@ class ClientController extends Controller
 
         return redirect()->route('clients.index');
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+
+        $results = Client::where('name', 'LIKE', "%{$search}%")
+            ->orWhere('surname', 'LIKE', "%{$search}%")
+            ->get();
+
+        return view('clients.index', compact('results'));
+    }
 }
