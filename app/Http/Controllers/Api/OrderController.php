@@ -26,40 +26,46 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'surname' => 'required',
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
             'email' => 'nullable|email',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
             'products' => 'required|array',
-            'note ' => ' nullable | string ',
+            'note' => 'nullable|string',
         ]);
 
-        $client = new Client();
-        $client->name = $request->name;
-        $client->surname = $request->surname;
-        $client->email = $request->email;
-        $client->phone = $request->phone;
-        $client->address = $request->address;
-        $client->save();
+        $email = isset($data['email']) ? strtolower(trim($data['email'])) : null;
+
+        $client = Client::firstOrCreate(
+            ['email' => $email],
+            [
+                'name' => $data['name'],
+                'surname' => $data['surname'],
+                'phone' => $data['phone'] ?? null,
+                'address' => $data['address'] ?? null,
+            ]
+        );
 
         $order = new Order();
         $order->client_id = $client->id;
         $order->order_date = now();
         $order->total = 0;
-        $order->note = $request->note;
+        $order->note = $data['note'] ?? null;
         $order->save();
 
         $total = 0;
 
-        foreach ($request->products as $productId => $quantity) {
+        $products = Product::whereIn('id', array_keys($data['products']))
+            ->get()
+            ->keyBy('id');
 
-            if ($quantity > 0) {
+        foreach ($data['products'] as $productId => $quantity) {
 
-                $product = Product::find($productId);
+            if ($quantity > 0 && isset($products[$productId])) {
 
-                if (!$product) {
-                    continue;
-                }
+                $product = $products[$productId];
 
                 $order->products()->attach($productId, [
                     'quantity' => $quantity,
@@ -74,8 +80,8 @@ class OrderController extends Controller
         $order->save();
 
         return response()->json([
-            'message' => 'Ordine creato',
-            'order' => $order
+            'message' => 'Ordine creato con successo',
+            'order' => $order->load('client', 'products')
         ]);
     }
 }
