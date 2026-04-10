@@ -38,15 +38,13 @@ class ClientController extends Controller
             'address' => 'nullable|string|max:255',
         ]);
 
-        $client = Client::firstOrCreate(
-            ['email' => $data['email']],
-            [
-                'name' => $data['name'],
-                'surname' => $data['surname'],
-                'phone' => $data['phone'],
-                'address' => $data['address'],
-            ]
-        );
+        $client = new Client();
+        $client->name = $data['name'];
+        $client->surname = $data['surname'];
+        $client->email = $data['email'];
+        $client->phone = $data['phone'];
+        $client->address = $data['address'];
+        $client->save();
 
         return redirect()->route('clients.index');
     }
