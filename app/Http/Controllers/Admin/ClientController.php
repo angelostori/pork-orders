@@ -33,18 +33,20 @@ class ClientController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
-            'email' => 'nullable|email|unique:clients,email',
+            'email' => 'required|email|unique:clients,email',
             'phone' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:255',
         ]);
 
-        $client = new Client();
-        $client->name = $data['name'];
-        $client->surname = $data['surname'];
-        $client->email = $data['email'];
-        $client->phone = $data['phone'];
-        $client->address = $data['address'];
-        $client->save();
+        $client = Client::firstOrCreate(
+            ['email' => $data['email']],
+            [
+                'name' => $data['name'],
+                'surname' => $data['surname'],
+                'phone' => $data['phone'],
+                'address' => $data['address'],
+            ]
+        );
 
         return redirect()->route('clients.index');
     }
