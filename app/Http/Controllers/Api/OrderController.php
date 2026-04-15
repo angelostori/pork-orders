@@ -29,7 +29,7 @@ class OrderController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
-            'email' => 'nullable|email',
+            'email' => 'required|email',
             'phone' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:255',
             'products' => 'required|array',
