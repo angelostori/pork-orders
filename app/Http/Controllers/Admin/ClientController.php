@@ -34,16 +34,14 @@ class ClientController extends Controller
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
             'email' => 'required|email|unique:clients,email',
+            'password' => 'required|string|min:8',
             'phone' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:255',
         ]);
 
         $client = new Client();
-        $client->name = $data['name'];
-        $client->surname = $data['surname'];
-        $client->email = $data['email'];
-        $client->phone = $data['phone'];
-        $client->address = $data['address'];
+        $client->fill($data); // Usa fill per brevità
+        $client->password = bcrypt($data['password']); // Hashing sicuro
         $client->save();
 
         return redirect()->route('clients.index');
@@ -74,15 +72,17 @@ class ClientController extends Controller
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
             'email' => 'nullable|email|unique:clients,email,' . $client->id,
+            'password' => 'nullable|string|min:8',
             'phone' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:255',
         ]);
 
-        $client->name = $data['name'];
-        $client->surname = $data['surname'];
-        $client->email = $data['email'];
-        $client->phone = $data['phone'];
-        $client->address = $data['address'];
+        $client->fill($request->except('password')); // Aggiorno tutto tranne la password
+
+        // Aggiorno la password solo se è stata compilata
+        if ($request->filled('password')) {
+            $client->password = bcrypt($request->password);
+        }
 
         $client->save();
 
