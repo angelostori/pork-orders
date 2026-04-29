@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 use App\Models\Client;
+use Illuminate\Support\Facades\Hash;
 
 class ClientSeeder extends Seeder
 {
@@ -22,6 +23,8 @@ class ClientSeeder extends Seeder
             $newClient->email = $faker->safeEmail();
             $newClient->phone = $faker->phoneNumber();
             $newClient->address = $faker->address();
+
+            $newClient->password = Hash::make('password');
 
             $newClient->save();
         }
