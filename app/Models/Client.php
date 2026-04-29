@@ -11,7 +11,9 @@ class Client extends Model
         'name',
         'surname',
         'email',
-        'password'
+        'password',
+        'phone',
+        'address',
     ];
 
     protected $hidden = [

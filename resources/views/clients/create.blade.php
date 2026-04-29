@@ -40,6 +40,17 @@
                 </div>
 
                 <div class="mb-3 row align-items-center">
+                    <label for="password" class="fw-bold col-1 col-form-label me-3">Password</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-lg @error('password') is-invalid @enderror" type="password" name="password" id="password" placeholder="Password">
+                        <label for="password" class="fst-italic text-secondary">(min 8 caratteri)</label>
+                        @error('password')
+                        <span class="mt-2 text-danger">*La password deve essere lunga almeno 8 caratteri</span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="mb-3 row align-items-center">
                     <label for="phone" class="fw-bold col-1 col-form-label me-3">Telefono</label>
                     <div class="col-8">
                         <input class="form-control form-control-lg @error('phone') is-invalid @enderror" type="text" name="phone" id="phone" placeholder="Telefono">
