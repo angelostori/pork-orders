@@ -1,59 +1,376 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Pork Orders - Sistema di Gestione Ordini
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Un'applicazione web moderna per la gestione degli ordini di carne ("pork orders"), costruita con **Laravel 11** e **Vue.js** tramite **Vite**. Il sistema permette di gestire clienti, prodotti e ordini con un'interfaccia intuitiva e API RESTful.
 
-## About Laravel
+## 📋 Sommario
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [Descrizione del Progetto](#descrizione-del-progetto)
+- [Architettura](#architettura)
+- [Flusso dell'Applicazione](#flusso-dellapplicazione)
+- [Modelli e Relazioni](#modelli-e-relazioni)
+- [Setup del Progetto](#setup-del-progetto)
+- [Utilizzo](#utilizzo)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 📝 Descrizione del Progetto
 
-## Learning Laravel
+**Pork Orders** è un sistema di gestione degli ordini che permette di:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- **Gestire Clienti**: Creare, modificare, visualizzare ed eliminare clienti con i loro dati (nome, cognome, email, telefono, indirizzo)
+- **Gestire Prodotti**: Amministrare il catalogo dei prodotti disponibili
+- **Gestire Ordini**: Creare ordini per i clienti, associare prodotti con quantità e prezzo, aggiungere note
+- **Autenticazione**: Sistema di autenticazione sicuro per utenti amministratori
+- **API RESTful**: Endpoint API per l'accesso ai dati da applicazioni terze
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🏗️ Architettura
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+L'applicazione segue l'architettura **MVC (Model-View-Controller)** di Laravel, con separazione tra web interface e API.
 
-### Premium Partners
+```
+┌─────────────────────────────────────────────┐
+│         Frontend (Blade + Vue.js)           │
+│    - Dashboard                              │
+│    - Pagine Clienti, Prodotti, Ordini      │
+│    - Pannello di Gestione                   │
+└────────────────┬────────────────────────────┘
+                 │ (HTTP Requests)
+┌────────────────▼────────────────────────────┐
+│         Laravel Application Core            │
+├─────────────────────────────────────────────┤
+│  Routes (web.php, api.php)                  │
+│  ↓                                          │
+│  Controllers                                │
+│  ├─ Admin Controllers (ClientController,   │
+│  │  OrderController, ProductController)    │
+│  └─ API Controllers (per endpoint REST)    │
+│  ↓                                          │
+│  Models + Business Logic                    │
+│  ├─ Client                                  │
+│  ├─ Order                                   │
+│  ├─ Product                                 │
+│  └─ User                                    │
+└────────────────┬────────────────────────────┘
+                 │
+┌────────────────▼────────────────────────────┐
+│         Database Layer                      │
+│  ├─ users_table                             │
+│  ├─ clients_table                           │
+│  ├─ products_table                          │
+│  ├─ orders_table                            │
+│  └─ order_product_table (Pivot)             │
+└─────────────────────────────────────────────┘
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Struttura delle Cartelle
 
-## Contributing
+- **`app/Models/`** - Modelli Eloquent (Client, Order, Product, User)
+- **`app/Http/Controllers/`** - Controller logici
+  - `Admin/` - Controller per l'interfaccia web
+  - `Api/` - Controller per gli endpoint API
+- **`routes/`** - Definizione delle rotte
+  - `web.php` - Rotte web (interfaccia utente)
+  - `api.php` - Rotte API (endpoint REST)
+- **`database/migrations/`** - Schema del database
+- **`resources/views/`** - Template Blade per il rendering HTML
+- **`resources/js/`** - Componenti Vue.js e JavaScript
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## 🔄 Flusso dell'Applicazione
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 1. **Autenticazione**
 
-## Security Vulnerabilities
+```
+Utente non autenticato
+    ↓
+Accede a login page (route /)
+    ↓
+Inserisce credenziali
+    ↓
+Sistema verifica le credenziali nella tabella users
+    ↓
+Se valide → Crea sessione autenticata
+    ↓
+Reindirizza a /dashboard
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 2. **Gestione Clienti**
 
-## License
+```
+Utente autenticato → Clicca "Clienti" (GET /clients)
+    ↓
+ClientController::index() → Recupera lista clienti dal DB
+    ↓
+Mostra lista in formato tabella (views/clients/index.blade.php)
+    ↓
+Azioni disponibili:
+├─ Visualizza: GET /clients/{id}
+├─ Crea: GET /clients/create → POST /clients
+├─ Modifica: GET /clients/{id}/edit → PUT /clients/{id}
+├─ Elimina: DELETE /clients/{id}
+└─ Ricerca: GET /clients/search
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 3. **Gestione Prodotti**
+
+```
+Utente autenticato → Clicca "Prodotti" (GET /products)
+    ↓
+ProductController::index() → Recupera lista prodotti dal DB
+    ↓
+Mostra lista disponibile
+    ↓
+Azioni disponibili:
+├─ Visualizza: GET /products/{id}
+├─ Crea: GET /products/create → POST /products
+├─ Modifica: GET /products/{id}/edit → PUT /products/{id}
+└─ Elimina: DELETE /products/{id}
+```
+
+### 4. **Gestione Ordini**
+
+```
+Utente autenticato → Clicca "Ordini" (GET /orders)
+    ↓
+OrderController::index() → Recupera lista ordini dal DB
+    ↓
+Crea nuovo ordine:
+    ├─ GET /orders/create → Mostra form
+    ├─ POST /orders → Memorizza ordine
+    ├─ Associa i prodotti alla tabella pivot (order_product)
+    ├─ Salva quantità, prezzo e note
+    └─ Reindirizza alla visualizzazione dell'ordine
+    ↓
+Azioni disponibili:
+├─ Visualizza: GET /orders/{id} → Mostra dettagli + prodotti
+├─ Modifica: GET /orders/{id}/edit → PUT /orders/{id}
+└─ Elimina: DELETE /orders/{id}
+```
+
+### 5. **API REST**
+
+```
+Client esterno (es. app mobile) → Effettua richiesta API
+    ↓
+Endpoint disponibili:
+├─ GET /api/products → Lista prodotti (JSON)
+├─ GET /api/products/{id} → Dettagli prodotto
+├─ GET /api/orders → Lista ordini
+├─ GET /api/orders/{id} → Dettagli ordine
+├─ POST /api/orders → Crea ordine (JSON)
+├─ POST /api/login → Autenticazione API
+└─ Tutte le risposte in formato JSON
+    ↓
+ApiOrderController, ApiProductController gestiscono le richieste
+    ↓
+Ritorna JSON response
+```
+
+---
+
+## 🔗 Modelli e Relazioni
+
+### **Client**
+```php
+- id (PK)
+- name: string
+- surname: string
+- email: unique
+- password: hashed
+- phone: string
+- address: string
+- timestamps
+
+Relazioni:
+→ hasMany('Order')
+```
+
+### **Product**
+```php
+- id (PK)
+- name: string
+- description: text
+- price: decimal
+- timestamps
+
+Relazioni:
+→ belongsToMany('Order') tramite order_product
+```
+
+### **Order**
+```php
+- id (PK)
+- client_id (FK)
+- note: text (nullable)
+- timestamps
+
+Relazioni:
+→ belongsTo('Client')
+→ belongsToMany('Product') con pivot(quantity, price)
+```
+
+### **order_product (Tabella Pivot)**
+```php
+- order_id (FK)
+- product_id (FK)
+- quantity: integer
+- price: decimal
+```
+
+### **User** (Amministratori)
+```php
+- id (PK)
+- name: string
+- email: unique
+- password: hashed
+- email_verified_at: timestamp
+- timestamps
+```
+
+---
+
+## 🚀 Setup del Progetto
+
+### Prerequisiti
+- PHP 8.2+
+- Composer
+- Node.js & npm/yarn
+- Server web (Apache/Nginx)
+- Database MySQL/PostgreSQL/SQLite
+
+### Installazione
+
+1. **Clonare il repository**
+   ```bash
+   git clone <repository-url>
+   cd pork-orders
+   ```
+
+2. **Installare dipendenze PHP**
+   ```bash
+   composer install
+   ```
+
+3. **Installare dipendenze JavaScript**
+   ```bash
+   npm install
+   ```
+
+4. **Configurare l'ambiente**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+5. **Configurare il database** nel file `.env`
+   ```
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=pork_orders
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+
+6. **Eseguire le migrazioni**
+   ```bash
+   php artisan migrate
+   ```
+
+7. **Caricare i dati di seed (opzionale)**
+   ```bash
+   php artisan db:seed
+   ```
+
+8. **Avviare il server di sviluppo**
+   ```bash
+   php artisan serve
+   npm run dev
+   ```
+
+9. **Accedere all'applicazione**
+   - URL: `http://localhost:8000`
+   - Usa un account di test dal seeder o registrati
+
+---
+
+## 📱 Utilizzo
+
+### Interfaccia Web
+
+1. **Autenticazione**: Effettua il login con le tue credenziali
+2. **Dashboard**: Visualizza una panoramica del sistema
+3. **Clienti**: Gestisci la lista dei clienti
+4. **Prodotti**: Visualizza e gestisci il catalogo
+5. **Ordini**: Crea e gestisci gli ordini dei clienti
+
+### API RESTful
+
+#### Endpoints Disponibili
+
+**Prodotti**
+```
+GET /api/products                    # Lista tutti i prodotti
+GET /api/products/{id}               # Dettagli di un prodotto
+```
+
+**Ordini**
+```
+GET /api/orders                      # Lista tutti gli ordini
+GET /api/orders/{id}                 # Dettagli di un ordine
+POST /api/orders                     # Crea un nuovo ordine
+```
+
+**Autenticazione**
+```
+POST /api/login                      # Effettua il login
+```
+
+#### Esempio di Richiesta API
+
+```bash
+# Recuperare lista prodotti
+curl -X GET http://localhost:8000/api/products
+
+# Creare un ordine
+curl -X POST http://localhost:8000/api/orders \
+  -H "Content-Type: application/json" \
+  -d '{
+    "client_id": 1,
+    "products": [
+      {"product_id": 1, "quantity": 5, "price": 50.00},
+      {"product_id": 2, "quantity": 3, "price": 30.00}
+    ],
+    "note": "Consegna martedì"
+  }'
+```
+
+---
+
+## 🛠️ Tecnologie Utilizzate
+
+- **Backend**: Laravel 11
+- **Frontend**: Blade Templates + Vue.js
+- **Build Tool**: Vite
+- **Database**: MySQL (configurabile)
+- **Authentication**: Laravel Sanctum
+- **Testing**: PHPUnit
+
+---
+
+## 📄 Licenza
+
+Progetto sviluppato per la gestione di ordini di carne. Tutti i diritti riservati.
+
+---
+
+## 👤 Autore
+
+Sviluppato come sistema di gestione ordini personalizzato.
+
+---
+
+**Ultima modifica**: Maggio 2026
